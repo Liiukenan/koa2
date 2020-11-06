@@ -1,6 +1,8 @@
 const Koa=require('koa')
 const app=new Koa()
 const fs=require('fs')
+// iconv-list 解决文件乱码
+const iconv = require('iconv-lite') 
 // 路由原理
 const render=(page)=>{
     return new Promise((resolve,reject)=>{
@@ -39,6 +41,7 @@ const route=async(url)=>{
 app.use(async(ctx)=>{
     let url=ctx.request.url
     let html=await route(url)
-    ctx.body=html
+    console.log(iconv.decode(html, 'utf-8'));
+    ctx.body=iconv.decode(html, 'utf-8')
 })
 app.listen(3000)

@@ -2,7 +2,11 @@ const Koa=require('koa')
 const app=new Koa()
 // 路由中间件
 const Router=require('koa-router')
-const router=new Router()
+
+// 加层级前缀
+const router=new Router({
+    prefix:'/kenan'
+})
 router
 .get('/',(ctx,next)=>{
     ctx.body="hello jspang"
